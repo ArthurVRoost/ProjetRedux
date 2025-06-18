@@ -1,0 +1,12 @@
+.footer{
+    border-top: 1px solid grey;
+    width: 80%;
+    margin-left: 9%;
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+    font-family: "Nunito Sans";
+}
+.footer p span{
+    font-weight: bold;
+}
