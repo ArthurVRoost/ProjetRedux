@@ -2,109 +2,131 @@
   {
     "nom": "Jalapeños Nachos",
     "ingredients": ["Doritos Nachos", "Kebab de poulet", "Cheddar", "Jalapeños", "Dés de tomate", "Sauce tomate", "Mozzarella"],
-    "image": "https://cdn-catalog.pizzahut.be/images/be/20250512134948432.png"
+    "image": "https://cdn-catalog.pizzahut.be/images/be/20250512134948432.png",
+    "prix": 20.10
   },
   {
     "nom": "Margherita",
     "ingredients": ["Sauce tomate", "Mozzarella"],
-    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406163450743.jpg"
+    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406163450743.jpg",
+    "prix": 14.00
   },
   {
     "nom": "Falafel",
     "ingredients": ["Boulettes de falafel", "Dés de tomate", "Sauce basilic", "Persil", "Sauce tomate", "Fromage végétal Violife"],
-    "image": "https://cdn-catalog.pizzahut.be/images/be/20230310155103630.png"
+    "image": "https://cdn-catalog.pizzahut.be/images/be/20230310155103630.png",
+    "prix": 20.10
   },
   
   {
     "nom": "Pepperoni Lovers",
     "ingredients": ["Saucisson pepperoni", "Sauce tomate", "Mozzarella"],
-    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406163536901.jpg"
+    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406163536901.jpg",
+    "prix": 15.00
   },
   {
     "nom": "Garden Lovers",
     "ingredients": ["Champignons", "Poivrons verts", "Oignons rouges", "Dés de tomate", "Sauce tomate", "Mozzarella"],
-    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406163156337.jpg"
+    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406163156337.jpg",
+    "prix": 16.00
   },
   {
     "nom": "Forestière",
     "ingredients": ["Émincés de jambon", "Champignons", "Dés de tomate", "Sauce tomate", "Mozzarella"],
-    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406163123958.jpg"
+    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406163123958.jpg",
+    "prix": 16.00
   },
   {
     "nom": "Hawaiian",
     "ingredients": ["Ananas", "Émincés de jambon", "Champignons", "Sauce tomate", "Mozzarella"],
-    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406163251534.jpg"
+    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406163251534.jpg",
+    "prix": 18.60
   },
   {
     "nom": "Cheesam",
     "ingredients": ["Mozzarella extra", "Émincés de jambon", "Sauce tomate"],
-    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406163026887.jpg"
+    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406163026887.jpg",
+    "prix": 15.00
   },
   
   {
     "nom": "Hot ’n Spicy",
     "ingredients": ["Bœuf épicé", "Piments rouges", "Oignons rouges", "Dés de tomate", "Sauce tomate", "Mozzarella"],
-    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406163326415.jpg"
+    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406163326415.jpg",
+    "prix": 18.60
   },
    {
     "nom": "Barbecue Chicken",
     "ingredients": ["Poulet grillé", "Champignons", "Oignons rouges", "Poivrons verts", "Mozzarella", "Sauce barbecue"],
-    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406162902485.jpg"
+    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406162902485.jpg",
+    "prix": 18.60
   },
    {
     "nom": "Barbecue",
     "ingredients": ["Bœuf épicé", "Lardons fumés", "Oignons rouges", "Mozzarella", "Sauce barbecue"],
-    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406162828439.jpg"
+    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406162828439.jpg",
+    "prix": 18.60
   },
   {
     "nom": "Alsace",
     "ingredients": ["Lardons fumés", "Oignons rouges", "Champignons", "Sauce à l'ail douce", "Sauce tomate", "Mozzarella"],
-    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406162803685.jpg"
+    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406162803685.jpg",
+    "prix": 18.60
   },
   {
     "nom": "Supreme",
     "ingredients": ["Bœuf épicé", "Pepperoni", "Oignons rouges", "Champignons", "Poivrons verts", "Sauce tomate", "Mozzarella"],
-    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406163730364.jpg"
+    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406163730364.jpg",
+    "prix": 18.60
   },
    {
     "nom": "Pepper",
     "ingredients": ["Double portion de bœuf", "Dés de tomate", "Oignons rouges", "Sauce au poivre", "Sauce tomate", "Mozzarella"],
-    "image": "https://cdn-catalog.pizzahut.be/images/be/20220712145325983.jpg"
+    "image": "https://cdn-catalog.pizzahut.be/images/be/20220712145325983.jpg",
+    "prix": 18.60
   },
   {
     "nom": "Chicken Twist",
     "ingredients": ["Kebab de poulet (Halal)", "Oignons rouges", "Dés de tomate", "Sauce à l'ail douce", "Sauce tomate", "Mozzarella"],
-    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406163057498.jpg"
+    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406163057498.jpg",
+    "prix": 18.60
   },
   {
     "nom": "Sweet Chicken Curry",
     "ingredients": ["Poulet grillé", "Ananas", "Dés de tomate", "Sauce curry douce", "Sauce tomate", "Mozzarella"],
-    "image": "https://cdn-catalog.pizzahut.be/images/be/20220504090424606.jpg"
+    "image": "https://cdn-catalog.pizzahut.be/images/be/20220504090424606.jpg",
+    "prix": 18.60
   },
   {
     "nom": "Pick & Mix",
     "ingredients": ["Sauce au choix", "Mozzarella", "3 ingrédients au choix"],
-    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406163353600.jpg"
+    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406163353600.jpg",
+    "prix": 18.60
   },
    {
     "nom": "4 Fromages",
     "ingredients": ["Emmental", "Fourme d’Ambert AOP", "Fromage de chèvre", "Crème légère", "Mozzarella"],
-    "image": "https://cdn-catalog.pizzahut.be/images/be/20250129162352075.jpg"
+    "image": "https://cdn-catalog.pizzahut.be/images/be/20250129162352075.jpg",
+    "prix": 20.10
   },
   {
     "nom": "Grimbergen",
     "ingredients": ["Jambon italien", "Champignons", "Fromage d'abbaye Grimbergen", "Crème légère", "Mozzarella"],
-    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406163225127.jpg"
+    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406163225127.jpg",
+    "prix": 20.10
   },
   {
     "nom": "Super Supreme",
     "ingredients": ["Bœuf épicé", "Porc", "Jambon", "Pepperoni", "Champignons", "Poivrons verts", "Oignons rouges", "Olives noires", "Sauce tomate", "Mozzarella"],
-    "image": "https://cdn-catalog.pizzahut.be/images/be/20240820094140285.jpg"
+    "image": "https://cdn-catalog.pizzahut.be/images/be/20240820094140285.jpg",
+    "prix": 20.10
   },
  
   {
     "nom": "Thon",
     "ingredients": ["Thon", "Olives noires", "Oignons rouges", "Persil", "Sauce tomate", "Mozzarella"],
-    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406164029214.jpg"
+    "image": "https://cdn-catalog.pizzahut.be/images/be/20220406164029214.jpg",
+    "prix": 20.10
   }
 ]
+
