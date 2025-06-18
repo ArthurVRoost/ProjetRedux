@@ -8,30 +8,164 @@
     top: 10%;
     background-color: #ffffff;
     border-radius: 10px;
-    width: 300px;
-    height: 500px;
+  
+    height: auto;
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    width: auto;
+    
 }
 
 .contentPanier {
     display: flex;
     flex-direction: column;
     flex: 1;
-    font-family: "Nunito", sans-serif;
+    font-family: "Nunito Sans", sans-serif;
+    gap: 20px;
+}
+
+.contentPanier h1{
+    margin-left: 10px;
+}
+
+
+.nameAndPrice{
+
+    display: flex;
+    gap: 180px;
+    margin-bottom: -30px;
+}
+
+
+.pizzaPanier{
+    border-top: 1px dashed;
+    border-bottom: 1px dashed;
+    padding: 10px;
+}
+
+.ingredientSuppr{
+    color: gray;
+    font-size: 15px;
+
 }
 
 .addPizza {
     margin-top: auto;
     display: flex;
-    gap: 10px;
+    gap: 145px;
+    
+}
+    
+
+.compteur button{
+    position: relative;
+    border-radius: 50px;
+    background-color: #dfdfe3;
+    color: white;
+    border: none;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.compteur button:hover::after{
+    position: absolute;
+    content: "";
+    width: 20px;
+    height: 2px;
+    background-color: #dfdfe3;
+    bottom: -5px;
+    margin-top: 20%;
+    left: 0;
+
+}
+
+.compteur span{
+    margin-inline: 5px;
 }
 
 .modifier{
     display: flex;
     gap: 10px;
-    margin-left: 20px;
+   
+
+}
+
+.modifier span:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.suppr{
+    color: red;
+}
+.couponDiv{
+    display: flex;
+    margin: 20px;
+    margin-top: 100px;
+
+}
+
+.couponDiv button{
+    background-color: #c44d44;
+    color: white;
+    border-top-right-radius: 20px ;
+    border-bottom-right-radius: 20px ;
+
+}
+
+.couponDiv button:hover{
+    background-color: #bea763;
+    cursor: pointer;
+}
+
+
+.couponDiv h4{
+    margin-right: 5px;
+}
+
+
+.footerPanier {
+    padding: 10px;
+    border-top: 1px solid #e0e0e0;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.totalPrix .label {
+    display: flex;
+    justify-content: space-between;
+    margin: 2px 0;
+}
+
+.livraison{
+    color: grey;
+}
+
+.btnCommander {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    background-color: #85bb2f;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.btnCommander:hover{
+    cursor: pointer;
+    background-color: #404437;
+}
+
+.btnCommander button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
 }
 
 
