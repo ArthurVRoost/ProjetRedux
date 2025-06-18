@@ -1,0 +1,29 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import Logo from '/src/assets/img/logoPH.png'
+import './nav.css'
+export default function Nav() {
+    
+
+    return(
+        <>
+            <div className='navDiv'>
+                <img className='imgNav' src={Logo} alt="" />
+                <div className='navDiv1'>
+                    <p className='navDiv1P'>Menus</p>
+                    <p className='navDiv1P'>Entrées</p>
+                    <p className='navDiv1P'>Pizza</p>
+                    <p className='navDiv1P'>Spécialités</p>
+                    <p className='navDiv1P'>Boissons</p>
+                    <p className='navDiv1P'>Desserts</p>
+                </div>
+                <div className='navDiv2'>
+                    <p className='navDiv2P1'>Se connecter</p>
+                    <p className='navDiv2P2'>FR</p>
+                    <FontAwesomeIcon className='navDiv2Icon' icon={faArrowDown} />
+                </div>
+                
+            </div>
+        </>
+    )
+}
