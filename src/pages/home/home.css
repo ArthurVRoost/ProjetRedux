@@ -1,0 +1,15 @@
+.divHome{
+    margin-left: 10%;
+    margin-top: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    flex-basis: 65%;
+}
+.homeDivP{
+    position: relative;
+}
+.homeImg{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
