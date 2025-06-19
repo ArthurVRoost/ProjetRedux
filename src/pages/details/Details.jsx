@@ -33,7 +33,7 @@ export default function Details() {
                 <div className="rightDiv">
                     <div className="title">
                         <h1>{pizza.name}</h1>
-                        <span>€ {pizza.price.toFixed(2)}</span>
+                        <span>€{pizza.price.toFixed(2)}</span>
                     </div>
                     <div className='description'>
                         {pizza.description}
@@ -42,16 +42,16 @@ export default function Details() {
                     <h2>Ingrédients</h2>
                     <ul>
                         {pizza.ingredients.map((element,index )=>(
-                            <>
-                            <li className='listIngredient' key={index}>
-                                <span>{element.name}{element.price}</span>
-                                  <div className="compteurDetails">
-                                        <button className='btnMoins'>-</button>
-                                        <span>1</span>
-                                        <button className='btnPlus' >+</button>
-                                    </div></li>
-                          
-                            </>
+                            <div className='detailsDivMap'>
+                                <div>
+                                    <li className='listIngredient' key={index}><span>{element.name}</span></li>
+                                </div>
+                                <div className="compteurDetails">
+                                    <button className='btnMoins'>-</button>
+                                    <span>1</span>
+                                    <button className='btnPlus' >+</button>
+                                </div>
+                            </div>
                         ))}
 
                         

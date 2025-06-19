@@ -6,7 +6,7 @@
     display: flex;
     flex-direction: column;
     margin-top: 40px;
-    height: 700px;
+    height: 720px;
     margin-left: -10%;
 }
 
@@ -50,25 +50,26 @@
 
 .title{
     position: absolute;
-    top: 20px;
+    top: 35px;
     display: flex;
     gap: 230px;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    height: 20px;
-}
+    height: 50px;
 
+}
+.title h1{
+    font-size: 20px;
+}
 .title span{
-     font-size: 16px;
+    font-size: 16px;
     font-weight: 600;
     color: #333;
-    white-space: nowrap;
 }
 
 .description{
     position: absolute;
-    top: 55px;
-   
+    top: 95px;
     font-size: 13px;
     color: grey;
     height: 30px ;
@@ -76,7 +77,7 @@
 
 .ingredients{
     position: absolute;
-    top: 130px;
+    top: 150px;
     border: 2px solid rgba(168, 166, 166, 0.459);
     border-radius: 5px;
     width: 90%;
@@ -114,7 +115,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-left: 150px;
+    margin-right: 3%;
 }
 
 .compteurDetails button{
@@ -146,7 +147,9 @@
 .listIngredient{
     display: flex;
     align-items: center;
+    line-height: 2.3;
 }
+
 
 .ajoutPanier {
     position: absolute;
@@ -186,4 +189,9 @@
 .ajoutPanier .prixAjoutPanier {
     font-size: 18px;
     font-weight: 700;
+}
+
+.detailsDivMap{
+    display: flex;
+    justify-content: space-between;
 }
