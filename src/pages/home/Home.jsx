@@ -1,9 +1,10 @@
 import './home.css'
-import data from '/src/data/data.json'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Panier from '../../components/panier/Panier';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function Home() {
     
@@ -11,12 +12,12 @@ export default function Home() {
     const handleDetails = (pizza) => {
     navigate(`/details/${pizza.name}`, { state: { pizza } })
 }
-    
+    const myBigPizza = useSelector(state=> state.pizza.allPizzas)
     return(
         <>
             <div className='pageHome'>
                 <div className='divHome'>
-                    {data.map((pizza, index)=>(
+                    {myBigPizza.map((pizza, index)=>(
                         <div key={index} className='homeDivP'>
                             <img className='homeImg' src={pizza.image} alt={pizza.image} />
                             <div className='homeDiv1'>
@@ -27,7 +28,7 @@ export default function Home() {
                                 <div className='homeDiv2'>
                                     <div className='homeContent'>
                                         <p className='homeP1'>à partir de</p>
-                                        <p className='homePrix'>€{pizza.price}</p>
+                                        <p className='homePrix'>€{pizza.price.toFixed(2)}</p>
                                         
                                         
                                         <FontAwesomeIcon onClick={() => handleDetails(pizza)} className='homeIcon'  icon={faPlus} />
