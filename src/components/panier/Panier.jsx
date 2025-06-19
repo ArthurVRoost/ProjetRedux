@@ -1,116 +1,123 @@
 import { useState } from "react"
 import "./panier.css"
+import data from '../../data/data.json'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMotorcycle } from '@fortawesome/free-solid-svg-icons';
 
-
-export default function Panier(){
-
+export default function Panier() {
     const [added, setAdded] = useState(true)
     const [paiement, setPaiement] = useState(false)
+    const [quantity, setQuantity] = useState(1)
+    const [couponCode, setCouponCode] = useState("")
+    
+    
+    //Pour tester le panier, à jeter pour remplacer par du redux
+    const pizzaPrice = 12.99
+    const deliveryPrice = 1.99
+    const totalPrice = (pizzaPrice * quantity) + deliveryPrice
+    const minimumOrder = 15.00
+
+    const handleQuantityChange = (change) => {
+        const newQuantity = quantity + change
+        if (newQuantity > 0) {
+            setQuantity(newQuantity)
+        }
+    }
+
+    return (<>
+    
+
+        <div className="panierAll">
 
 
-    return(
-
-        <>
         
             <div className="panierCard">
                 <div className="contentPanier">
-
-
-
-                
                     <h1>Panier d'achat</h1>
 
+                
 
-                    {added? <> 
-                    <div className="pizzaPanier">
-                        {/* Créer un tableau avec les pizzas ajoutés afin de map dessus
-                        selectedPizza.map{(item) =>(
+                    {added ? (<>
+                        <div className="pizzaPanier">
                             <div className="nameAndPrice">
-                                <h3>item.nom</h3>
-                                <h3>item.price</h3>
+                                <h3>Pizza Margherita</h3>
+                                <span className="price">€{pizzaPrice}</span>
                             </div>
-                        
-                        <p>Sans "ingrédient supprimé"</p>
-                        )} */}
-                        <div className="nameAndPrice">
-                            <h3>item.nom</h3>
-                            <h3>item.price</h3>
-                        </div>
-                        
-                        <p className="ingredientSuppr">Sans "ingrédient supprimé"</p>
-
-                        <div className="addPizza">
-                    
-
-                        <div className="compteur">
                             
-                            <button>-</button>
-                            <span>1</span>
-                            <button>+</button>
-                        </div>
+                            <p className="ingredientSuppr">Sans champignons</p>
 
-                        <div className="modifier">
-                            <span>Modifier</span>
-                            <span className="suppr">Supprimer</span>
-                            
+                            <div className="addPizza">
+                                <div className="compteur">
+                                    <button onClick={() => handleQuantityChange(-1)}>-</button>
+                                    <span>{quantity}</span>
+                                    <button onClick={() => handleQuantityChange(1)}>+</button>
+                                </div>
+
+                                <div className="modifier">
+                                    <span className="modifierBtn">Modifier</span>
+                                    <span className="suppr" onClick={() => setAdded(false)}>Supprimer</span>
+                                </div>
+                            </div>
                         </div>
                         
-                    </div>
-
-
-        
-                    
-                    </div>
-
-                    
-                     </> : 
-                    
-                        <>
+                        </>
+                    ) : (
                         <div className="panierVide">
                             <p>Panier vide</p>
                         </div>
-                        </>
-                    }
+                    )}
 
-                   
                     
-                    {!paiement && 
-                    <div className="couponDiv">
-                        <h4>Coupon</h4>
-                        <input type="text" placeholder="Entrez un coupon" /> 
-                        <button>AJOUTER</button>
-                    </div>  
-                    }   
-                    
-
-               
-
-                     
-                    
-
+                    {!paiement && added && (
+                        <div className="couponDiv">
+                            <input 
+                                type="text" 
+                                placeholder="Vous pouvez entrer votre coupon"
+                                value={couponCode}
+                                onChange={(e) => setCouponCode(e.target.value)}
+                            />
+                            <button>AJOUTER</button>
+                        </div>
+                    )}
                 </div>
 
+                
                 <div className="footerPanier">
                     <div className="totalPrix">
-                        <div className="label livraison">
+                        {totalPrice < minimumOrder && <div className="label livraison">
                             <span>Livraison</span>
-                            <span>€1,99</span>
-                        </div>
+                            <span>€{deliveryPrice}</span>
+                        </div>}
+                        
                         <div className="label">
                             <strong>Total</strong>
-                            <strong>prix dynamique</strong>
+                            <strong>€{added ? totalPrice.toFixed(2): '0,00'}</strong>
                         </div>
                     </div>
 
-                    <div className="btnCommander">
-                        <span className="quantite">Quantité </span>
-                        <span className="commander">Commander</span>
-                        <span className="prixFinal">prix dynamique</span>
-                    </div>
+                
+
+                    
+                    
                 </div>
+                    
+                </div>
+                <div className="btnCommander">
+                                <span className="quantite">{added ? quantity : 0}</span>
+                                <span className="commander">Commander</span>
+                                <span className="prixFinal">€{added ? totalPrice.toFixed(2) : '0,00'}</span>
+                        </div>
 
-            </div>
-
+                        {totalPrice < minimumOrder && (
+                            <div className="commandeMinimum">
+                                <FontAwesomeIcon icon={faMotorcycle} />
+                                <div className="text">
+                                    <h4>Commander</h4>
+                                    <p>Livraison à partir d'un montant minimum de commande de €{minimumOrder}.</p>
+                                </div>
+                            </div>
+                        )}
+        </div>
         </>
     )
 }

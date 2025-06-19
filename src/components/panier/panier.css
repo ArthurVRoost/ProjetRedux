@@ -1,61 +1,97 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 
 
-
-.panierCard {
-    position: absolute;
-    right: 10%;
-    top: 10%;
-    background-color: #ffffff;
-    border-radius: 10px;
-  
-    height: auto;
+.panierAll {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    width: 400px;
     display: flex;
     flex-direction: column;
-    width: auto;
-    
+    font-family: "Nunito Sans", sans-serif;
+    gap: 12px;
+}
+
+.panierCard {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border: 1px solid #e5e5e5;
+    max-height: 70vh;
+    overflow-y: auto;
 }
 
 .contentPanier {
     display: flex;
     flex-direction: column;
-    flex: 1;
-    font-family: "Nunito Sans", sans-serif;
-    gap: 20px;
+    
+    padding: 20px;
+    gap: 16px;
 }
 
-.contentPanier h1{
-    margin-left: 10px;
+.contentPanier h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed grey;
+}
+
+.panierVide {
+    text-align: center;
+    padding: 40px 20px;
+    color: #999;
+    font-size: 16px;
 }
 
 
-.nameAndPrice{
+.pizzaPanier {
+    border-bottom: 1px dashed grey;
+    padding: 16px 0;
+    margin: 16px 0;
+}
 
+.nameAndPrice {
     display: flex;
-    gap: 180px;
-    margin-bottom: -30px;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
 }
 
-
-.pizzaPanier{
-    border-top: 1px dashed;
-    border-bottom: 1px dashed;
-    padding: 10px;
+.nameAndPrice h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    flex: 1;
 }
 
-.ingredientSuppr{
-    color: gray;
-    font-size: 15px;
+.nameAndPrice .price {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+}
 
+.ingredientSuppr {
+    color: #999;
+    font-size: 14px;
+    margin: 4px 0 12px 0;
 }
 
 .addPizza {
-    margin-top: auto;
     display: flex;
-    gap: 145px;
-    
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
 }
-    
+
+.compteur {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
 .compteur button{
     position: relative;
@@ -77,95 +113,189 @@
     bottom: -5px;
     margin-top: 20%;
     left: 0;
-
 }
 
-.compteur span{
-    margin-inline: 5px;
+.compteur span {
+    font-weight: 600;
+    min-width: 20px;
+    text-align: center;
+    font-size: 16px;
 }
 
-.modifier{
+.modifier {
     display: flex;
-    gap: 10px;
-   
-
+    gap: 16px;
 }
 
-.modifier span:hover{
+.modifier span {
+    font-size: 14px;
     cursor: pointer;
     text-decoration: underline;
+    transition: color 0.2s ease;
 }
 
-.suppr{
-    color: red;
+.modifier span:hover {
+    opacity: 0.8;
 }
-.couponDiv{
+
+.modifier .modifierBtn {
+    color: #007bff;
+}
+
+.modifier .suppr {
+    color: #e74c3c;
+}
+
+
+.couponDiv {
     display: flex;
-    margin: 20px;
-    margin-top: 100px;
-
+    align-items: stretch;
+    margin: 20px 0;
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f9f9f9;
 }
 
-.couponDiv button{
+.couponDiv input {
+    flex: 1;
+    padding: 12px 16px;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    outline: none;
+}
+
+.couponDiv input::placeholder {
+    color: #999;
+}
+
+.couponDiv button {
     background-color: #c44d44;
     color: white;
-    border-top-right-radius: 20px ;
-    border-bottom-right-radius: 20px ;
-
-}
-
-.couponDiv button:hover{
-    background-color: #bea763;
+    border: none;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
-
-.couponDiv h4{
-    margin-right: 5px;
+.couponDiv button:hover {
+    background-color: #bea763;
 }
 
 
 .footerPanier {
-    padding: 10px;
-    border-top: 1px solid #e0e0e0;
+    padding: 20px;
+    border-top: 1px solid #e5e5e5;
     background-color: #f9f9f9;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    border-radius: 0 0 12px 12px;
+}
+
+.totalPrix {
+    margin-bottom: 0;
 }
 
 .totalPrix .label {
     display: flex;
     justify-content: space-between;
-    margin: 2px 0;
+    margin: 8px 0;
+    font-size: 14px;
 }
 
-.livraison{
-    color: grey;
+.totalPrix .label.livraison {
+    color: #666;
+}
+
+.totalPrix .label strong {
+    font-size: 16px;
+    color: #333;
 }
 
 .btnCommander {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
-    background-color: #85bb2f;
+    background: linear-gradient(135deg, #8bc34a, #689f38);
     color: white;
-    padding: 20px;
-    border-radius: 10px;
-    font-size: 20px;
-}
-
-.btnCommander:hover{
+    padding: 16px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
-    background-color: #404437;
-}
-
-.btnCommander button {
-    padding: 10px 15px;
+    transition: all 0.2s ease;
     border: none;
-    border-radius: 6px;
-    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(139, 195, 74, 0.3);
+    background-color: #ffffff;
+    border: 1px solid #e5e5e5;
 }
 
+.btnCommander:hover {
+    background: linear-gradient(135deg, #689f38, #558b2f);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(139, 195, 74, 0.4);
+}
+
+.btnCommander .quantite {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.btnCommander .commander {
+    flex: 1;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.btnCommander .prixFinal {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+
+.commandeMinimum {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background-color: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.commandeMinimum .icon {
+    width: 24px;
+    height: 24px;
+    background-color: #f39c12;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.commandeMinimum .text {
+    flex: 1;
+}
+
+.commandeMinimum .text h4 {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+.commandeMinimum .text p {
+    margin: 0;
+    font-size: 12px;
+    color: #666;
+    line-height: 1.4;
+}
 
