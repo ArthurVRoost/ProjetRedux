@@ -1,0 +1,33 @@
+.finiDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15%;
+    margin-bottom: 12%;
+}
+.finiIcon{
+    background-color: #63D09D;
+    color: white;
+    border-radius: 50%;
+    padding: 30px 32px;
+}
+.finiH2{
+    font-family: "Nunito Sans";
+    font-size: 30px;
+    font-weight: 100;
+    margin-bottom: 0;
+}
+.finiP{
+    font-family: "Nunito Sans";
+    font-size: 20px;
+}   
+.finiBtn{
+    background-color: #DC3545;
+    padding: 15px 30px;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
