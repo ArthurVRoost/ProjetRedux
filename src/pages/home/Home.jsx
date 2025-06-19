@@ -3,6 +3,7 @@ import data from '/src/data/data.json'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Panier from '../../components/panier/Panier';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
     const pizzaMap = data.map(pizza=>({
@@ -10,6 +11,10 @@ export default function Home() {
         name: pizza.name,
         price: pizza.price
     }))
+    const navigate = useNavigate()
+    const handleDetails = (pizzaName) => {
+        navigate(`/details/${pizzaName}`)
+    }
     
     return(
         <>
@@ -27,7 +32,7 @@ export default function Home() {
                                     <div className='homeContent'>
                                         <p className='homeP1'>à partir de</p>
                                         <p className='homePrix'>€{pizza.price}</p>
-                                        <FontAwesomeIcon className='homeIcon' icon={faPlus} />
+                                        <FontAwesomeIcon onClick={() => handleDetails(pizza.name)} className='homeIcon'  icon={faPlus} />
                                     </div>
                                     
                                 </div>

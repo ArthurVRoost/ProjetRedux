@@ -18,8 +18,8 @@ function App() {
       <Routes>
           <Route path='/' element={<Layout/>}>
             <Route index element={<Home/>}/>
-            <Route path='/details'element={<Details/>}/>
-            <Route path='/details/fini' element={<Fini/>}/>
+            <Route path='details/:pizza'element={<Details/>}/>
+            <Route path='details/:pizza/fini' element={<Fini/>}/>
           </Route>
       </Routes>
 
