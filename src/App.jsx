@@ -6,7 +6,7 @@ import { Route, Routes } from 'react-router-dom'
 import Layout from './components/layout'
 import Fini from './pages/fini/Fini'
 import Details from './pages/details/Details'
-import Nav from './components/nav/Nav'
+
 
 
 
@@ -18,9 +18,9 @@ function App() {
       <Routes>
           <Route path='/' element={<Layout/>}>
             <Route index element={<Home/>}/>
-            <Route path='/fini' element={<Fini/>}/>
+            <Route path='/details'element={<Details/>}/>
+            <Route path='/details/fini' element={<Fini/>}/>
           </Route>
-
       </Routes>
 
     </>
