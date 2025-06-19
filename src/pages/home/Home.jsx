@@ -6,15 +6,11 @@ import Panier from '../../components/panier/Panier';
 import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
-    const pizzaMap = data.map(pizza=>({
-        image: pizza.image,
-        name: pizza.name,
-        price: pizza.price
-    }))
+    
     const navigate = useNavigate()
-    const handleDetails = (pizzaName) => {
-        navigate(`/details/${pizzaName}`)
-    }
+    const handleDetails = (pizza) => {
+    navigate(`/details/${pizza.name}`, { state: { pizza } })
+}
     
     return(
         <>
@@ -32,7 +28,9 @@ export default function Home() {
                                     <div className='homeContent'>
                                         <p className='homeP1'>à partir de</p>
                                         <p className='homePrix'>€{pizza.price}</p>
-                                        <FontAwesomeIcon onClick={() => handleDetails(pizza.name)} className='homeIcon'  icon={faPlus} />
+                                        
+                                        
+                                        <FontAwesomeIcon onClick={() => handleDetails(pizza)} className='homeIcon'  icon={faPlus} />
                                     </div>
                                     
                                 </div>

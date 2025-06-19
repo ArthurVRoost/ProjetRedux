@@ -1,10 +1,13 @@
 import './details.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 export default function Details() {
     const { pizzaName } = useParams()
+    const { state } = useLocation();
+    const pizza = state?.pizza;
+    
     return (
         <>
         <div className='divPage'>
@@ -21,7 +24,7 @@ export default function Details() {
                 </div>
                 <div className="rightDiv">
                     <div className="title">
-                        <h1>Margherita</h1>
+                        <h1>{pizza.name}</h1>
                         <span>14€</span>
                     </div>
                     <div className='description'>
