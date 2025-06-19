@@ -7,6 +7,10 @@
     justify-content: space-around;
     font-family: "Nunito Sans";
     font-weight: 100;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 3;
 }
 .navDiv1{
     display: flex;

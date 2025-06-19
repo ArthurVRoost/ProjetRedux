@@ -4,12 +4,13 @@
 .panierAll {
     position: fixed;
     right: 20px;
-    top: 20px;
-    width: 400px;
+    top: 90px;
+    width: 320px;
     display: flex;
     flex-direction: column;
     font-family: "Nunito Sans", sans-serif;
     gap: 12px;
+    height: 630px;
 }
 
 .panierCard {
