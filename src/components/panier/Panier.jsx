@@ -3,6 +3,7 @@ import "./panier.css"
 import data from '../../data/data.json'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMotorcycle } from '@fortawesome/free-solid-svg-icons';
+import { useSelector } from "react-redux";
 
 export default function Panier() {
     const [added, setAdded] = useState(true)
@@ -11,12 +12,9 @@ export default function Panier() {
     const [couponCode, setCouponCode] = useState("")
     
     
-    //Pour tester le panier, à jeter pour remplacer par du redux
-    const pizzaPrice = 12.99
-    const deliveryPrice = 1.99
-    const totalPrice = (pizzaPrice * quantity) + deliveryPrice
-    const minimumOrder = 15.00
-
+    const allPanier = useSelector(state=> state.pizza.panier)
+    console.log(allPanier);
+    
     const handleQuantityChange = (change) => {
         const newQuantity = quantity + change
         if (newQuantity > 0) {
@@ -38,10 +36,10 @@ export default function Panier() {
                 
 
                     {added ? (<>
-                        <div className="pizzaPanier">
+                        {/* <div className="pizzaPanier">
                             <div className="nameAndPrice">
-                                <h3>Pizza Margherita</h3>
-                                <span className="price">€{pizzaPrice}</span>
+                                <h3>{allPanier.name}</h3>
+                                <span className="price"></span>
                             </div>
                             
                             <p className="ingredientSuppr">Sans champignons</p>
@@ -49,7 +47,32 @@ export default function Panier() {
                             <div className="addPizza">
                                 <div className="compteur">
                                     <button onClick={() => handleQuantityChange(-1)}>-</button>
-                                    <span>{quantity}</span>
+                                    <span></span>
+                                    <button onClick={() => handleQuantityChange(1)}>+</button>
+                                </div>
+
+                                <div className="modifier">
+                                    <span className="modifierBtn">Modifier</span>
+                                    <span className="suppr" onClick={() => setAdded(false)}>Supprimer</span>
+                                </div>
+                            </div>
+                        </div> */}
+                        {allPanier.map((element,index)=>(
+                            <>
+                            <div className="pizzaPanier">
+                            <div className="nameAndPrice">
+                               { console.log(element)}
+                                
+                                <h3>{element.name}</h3>
+                                <span className="price"></span>
+                            </div>
+                            
+                            <p className="ingredientSuppr">Sans champignons</p>
+
+                            <div className="addPizza">
+                                <div className="compteur">
+                                    <button onClick={() => handleQuantityChange(-1)}>-</button>
+                                    <span>{element.quantite}</span>
                                     <button onClick={() => handleQuantityChange(1)}>+</button>
                                 </div>
 
@@ -59,7 +82,8 @@ export default function Panier() {
                                 </div>
                             </div>
                         </div>
-                        
+                            </>
+                        ))}
                         </>
                     ) : (
                         <div className="panierVide">
@@ -84,14 +108,14 @@ export default function Panier() {
                 
                 <div className="footerPanier">
                     <div className="totalPrix">
-                        {totalPrice < minimumOrder && <div className="label livraison">
+                        {/* {totalPrice < minimumOrder && <div className="label livraison">
                             <span>Livraison</span>
-                            <span>€{deliveryPrice}</span>
-                        </div>}
+                            <span></span>
+                        </div>} */}
                         
                         <div className="label">
                             <strong>Total</strong>
-                            <strong>€{added ? totalPrice.toFixed(2): '0,00'}</strong>
+                            {/* <strong>€{added ? totalPrice.toFixed(2): '0,00'}</strong> */}
                         </div>
                     </div>
 
@@ -105,10 +129,10 @@ export default function Panier() {
                 <div className="btnCommander">
                                 <span className="quantite">{added ? quantity : 0}</span>
                                 <span className="commander">Commander</span>
-                                <span className="prixFinal">€{added ? totalPrice.toFixed(2) : '0,00'}</span>
+                               {/* ` <span className="prixFinal">€{added ? totalPrice.toFixed(2) : '0,00'}</span>` */}
                         </div>
 
-                        {totalPrice < minimumOrder && (
+                        {/* {totalPrice < minimumOrder && (
                             <div className="commandeMinimum">
                                 <FontAwesomeIcon icon={faMotorcycle} />
                                 <div className="text">
@@ -116,7 +140,7 @@ export default function Panier() {
                                     <p>Livraison à partir d'un montant minimum de commande de €{minimumOrder}.</p>
                                 </div>
                             </div>
-                        )}
+                        )} */}
         </div>
         </>
     )
