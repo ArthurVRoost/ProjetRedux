@@ -57,9 +57,9 @@ export default function Home() {
                 </div>
                 
                 {/* Bouton Commander mobile - toujours présent sur mobile */}
-                <div 
+               <div 
                     className={`mobile-commander-btn mobile-only ${allPanier.length === 0 ? 'disabled' : ''}`}
-                    onClick={allPanier.length > 0 ? handleFini : undefined}
+                    onClick={allPanier.length > 0 ? () => setShowPanier(true) : undefined}
                 >
                     <span className='commander-text'>Commander</span>
                     {allPanier.length > 0 && <span className='commander-count'>{totalItems}</span>}
