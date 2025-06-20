@@ -17,13 +17,16 @@ export default function Panier({ onClose,show }) {
     const allPanier = useSelector(state => state.pizza.panier)
 
     
-    
+  
     const handleCommander = () => {
         // Logique de commande
         console.log("Commande passée!");
         if (onClose) {
             onClose(); // Fermer le modal sur mobile après commande
         }
+        if (allPanier.length > 0) {
+        navigate('/fini');  // Navigation vers la page 'fini'
+    }
     }
     const handleDetails = (pizza) => {
             dispatch(pizzaSelection(pizza))

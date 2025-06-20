@@ -18,7 +18,11 @@ export default function Home() {
     
     const myBigPizza = useSelector(state=> state.pizza.allPizzas)
     const allPanier = useSelector(state=> state.pizza.panier)
-    
+    const handleFini = () => {
+    if (allPanier.length > 0) {
+      navigate('/fini');
+    }
+  };
     // Calculer le nombre total d'articles dans le panier
     const totalItems = allPanier.reduce((total, item) => total + (item.quantite || 1), 0);
     
@@ -55,7 +59,7 @@ export default function Home() {
                 {/* Bouton Commander mobile - toujours présent sur mobile */}
                 <div 
                     className={`mobile-commander-btn mobile-only ${allPanier.length === 0 ? 'disabled' : ''}`}
-                    onClick={allPanier.length > 0 ? () => setShowPanier(true) : undefined}
+                    onClick={allPanier.length > 0 ? handleFini : undefined}
                 >
                     <span className='commander-text'>Commander</span>
                     {allPanier.length > 0 && <span className='commander-count'>{totalItems}</span>}
