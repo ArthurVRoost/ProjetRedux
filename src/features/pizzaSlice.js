@@ -288,7 +288,7 @@ export const pizzaData = createSlice({
 
         "retirerPizza" : (state, action)=>{
           const present = state.panier.find(element=>element.name===action.payload.name)
-          if (present ){
+          if (present && present.quantite>1 ){
             present.quantite -= 1
           }
         },
