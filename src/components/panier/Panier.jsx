@@ -4,12 +4,15 @@ import data from '../../data/data.json'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMotorcycle } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { supprimer } from "../../features/pizzaSlice";
 
 export default function Panier() {
     const [added, setAdded] = useState(true)
     const [paiement, setPaiement] = useState(false)
     const [quantity, setQuantity] = useState(1)
     const [couponCode, setCouponCode] = useState("")
+    const dispatch = useDispatch()
     
     
     const allPanier = useSelector(state=> state.pizza.panier)
@@ -61,7 +64,9 @@ export default function Panier() {
                             <>
                             <div className="pizzaPanier">
                             <div className="nameAndPrice">
-                               { console.log(element)}
+                               { console.log("objet pizza => "+element)}
+                               {console.log("element.quantite => "+element.quantite)}
+                               
                                 
                                 <h3>{element.name}</h3>
                                 <span className="price"></span>
@@ -71,14 +76,14 @@ export default function Panier() {
 
                             <div className="addPizza">
                                 <div className="compteur">
-                                    <button onClick={() => handleQuantityChange(-1)}>-</button>
+                                    <button onClick={() => element.quantite-1}>-</button>
                                     <span>{element.quantite}</span>
-                                    <button onClick={() => handleQuantityChange(1)}>+</button>
+                                    <button onClick={() => element.quantite+1}>+</button>
                                 </div>
 
                                 <div className="modifier">
                                     <span className="modifierBtn">Modifier</span>
-                                    <span className="suppr" onClick={() => setAdded(false)}>Supprimer</span>
+                                    <span className="suppr" onClick={()=>dispatch(supprimer(element))}>Supprimer</span>
                                 </div>
                             </div>
                         </div>

@@ -273,10 +273,17 @@ export const pizzaData = createSlice({
                     ...action.payload,
                     quantite:1})
             }
+        },
+        "supprimer" : (state, action)=>{
+            state.panier = state.panier.filter(element => element.name !== action.payload.name)
+        },
+
+        "ajoutEncore": (state, action)=>{
+          const dejala = state
         }
     }
 
 
 })
-export const {ajouter} = pizzaData.actions
+export const {ajouter, supprimer} = pizzaData.actions
 export const pizzaReducer= pizzaData.reducer
