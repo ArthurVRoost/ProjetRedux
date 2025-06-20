@@ -1,23 +1,32 @@
+
+
 import { useState } from "react"
 import "./panier.css"
-import data from '../../data/data.json'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMotorcycle } from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from "react-redux";
-import { ajoutEncore, pizzaSelection, retirerPizza, supprimer } from "../../features/pizzaSlice";
+import { ajoutEncore, pizzaSelection, retirerPizza, supprimer,appliquerCoupon } from "../../features/pizzaSlice";
+
 import { useNavigate } from "react-router-dom";
 
-export default function Panier({ onClose,show }) {
+
+export default function Panier({ onClose, show }) {
     const [added, setAdded] = useState(true)
     const [paiement, setPaiement] = useState(false)
-
     const [couponCode, setCouponCode] = useState("")
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const allPanier = useSelector(state => state.pizza.panier)
+    const totalPanier = useSelector(state => state.pizza.totalPanier);
+    const realCoupon = useSelector(state => state.pizza.coupon)
 
-    
-  
+    const applyCoupon = () => {
+        console.log(realCoupon, couponCode, totalPanier)
+        
+        if (realCoupon == couponCode)
+            dispatch(appliquerCoupon({ code: couponCode }));
+
+    }
+
+
     const handleCommander = () => {
         // Logique de commande
         console.log("Commande passée!");
@@ -42,7 +51,9 @@ export default function Panier({ onClose,show }) {
     const totalPrice = calculateTotal();
     const totalItems = allPanier.reduce((total, item) => total + (item.quantite || 1), 0);
 
-    return (
+    
+
+return (
     <div className="panierAll">
         {show === true ? (
             <>
@@ -60,7 +71,17 @@ export default function Panier({ onClose,show }) {
                                             <span className="price">€{(element.price * (element.quantite || 1)).toFixed(2)}</span>
                                         </div>
 
-                                        <p className="ingredientSuppr">Sans champignons</p>
+                                        {element.customIngredients && element.customIngredients.length > 0 && (
+                                        <p className="ingredientSuppr">
+                                            {element.customIngredients.map((i, idx) => (
+                                            <span key={idx}>
+                                                {i.type === "sans" ? `Sans ${i.name}` : `Supplément ${i.name}`}
+                                                {idx < element.customIngredients.length - 1 && ', '}
+                                            </span>
+                                            ))}
+                                        </p>
+                                        )}
+
 
                                         <div className="addPizza">
                                             <div className="compteur">
@@ -91,7 +112,7 @@ export default function Panier({ onClose,show }) {
                                     value={couponCode}
                                     onChange={(e) => setCouponCode(e.target.value)}
                                 />
-                                <button>AJOUTER</button>
+                                <button onClick={applyCoupon}>AJOUTER</button>
                             </div>
                         )}
                     </div>
@@ -101,7 +122,10 @@ export default function Panier({ onClose,show }) {
                             <div className="totalPrix">
                                 <div className="label">
                                     <strong>Total</strong>
-                                    <strong>€{totalPrice.toFixed(2)}</strong>
+                                    <strong>
+                                        {totalPanier.toFixed(2)}
+
+                                        </strong>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +137,7 @@ export default function Panier({ onClose,show }) {
                     <div className="btnCommander" onClick={handleCommander}>
                         <span className="quantite">{totalItems}</span>
                         <span className="commander">Commander</span>
-                        <span className="prixFinal">€{totalPrice.toFixed(2)}</span>
+                        <span className="prixFinal">€{totalPanier.toFixed(2)}</span>
                     </div>
                 )}
             </>
@@ -132,7 +156,16 @@ export default function Panier({ onClose,show }) {
                                         <span className="price">€{(element.price * (element.quantite || 1)).toFixed(2)}</span>
                                     </div>
 
-                                    <p className="ingredientSuppr">Sans champignons</p>
+                                    {element.customIngredients && element.customIngredients.length > 0 && (
+                                        <p className="ingredientSuppr">
+                                            {element.customIngredients.map((i, idx) => (
+                                            <span key={idx}>
+                                                {i.type === "sans" ? `Sans ${i.name}` : `Supplément ${i.name}`}
+                                                {idx < element.customIngredients.length - 1 && ', '}
+                                            </span>
+                                            ))}
+                                        </p>
+                                        )}
                                 </div>
                             ))}
                         </>
@@ -157,4 +190,6 @@ export default function Panier({ onClose,show }) {
         {console.log("SHOW => " + show)}
     </div>
 );
+
+
 }

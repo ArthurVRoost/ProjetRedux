@@ -1,5 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const calculerTotalPanier = (panier) => {
+  return panier.reduce((total, pizza) => {
+    const prixPizza = pizza.price * (pizza.quantite || 1);
+    return total + prixPizza;
+  }, 0).toFixed(2);
+};
+
+
+
 export const pizzaData = createSlice({
     name:"pizza",
     initialState:{
@@ -261,22 +270,40 @@ export const pizzaData = createSlice({
   }
 ],
     panier : [],
-    pizzaSelected : null
+    pizzaSelected : null,
+    ingredientSelected: null,
+    coupon:"cr7legoat"
     },
     reducers:{
-        "ajouter": (state,action)=>{
-            const present = state.panier.find(element=>element.name===action.payload.name)
-            if (present) {
-                present.quantite+=1
+       "ajouter": (state, action) => {
+          const { idPanier } = action.payload;
+
+          if (idPanier !== undefined) {
+            const index = state.panier.findIndex(p => p.idPanier === idPanier);
+            if (index !== -1) {
+              state.panier[index] = {
+                ...action.payload,
+                idPanier
+              };
+              state.totalPanier = parseFloat(calculerTotalPanier(state.panier));
+              return;
             }
-            else{
-                state.panier.push({
-                    ...action.payload,
-                    quantite:1})
-            }
-        },
+          }
+
+          const newPizza = {
+            ...action.payload,
+            quantite: 1,
+            idPanier: Date.now()
+          };
+
+          state.panier.push(newPizza);
+          state.totalPanier = parseFloat(calculerTotalPanier(state.panier));
+        }
+,
         "supprimer" : (state, action)=>{
             state.panier = state.panier.filter(element => element.name !== action.payload.name)
+            state.totalPanier = parseFloat(calculerTotalPanier(state.panier));
+
         },
 
         "ajoutEncore": (state, action)=>{
@@ -284,45 +311,60 @@ export const pizzaData = createSlice({
             if (present) {
                 present.quantite+=1
             }
+          state.totalPanier = parseFloat(calculerTotalPanier(state.panier));
+
         },
 
         "retirerPizza" : (state, action)=>{
           const present = state.panier.find(element=>element.name===action.payload.name)
-          if (present && present.quantite>1 ){
+          if (present && present.quantite > 1 ){
             present.quantite -= 1
           }
+        state.totalPanier = parseFloat(calculerTotalPanier(state.panier));
+
         },
 
-        "pizzaSelection" : (state, action)=>{
-          const details = state.allPizzas.find(element=> element.name === action.payload.name)
-          if (details){
-            state.pizzaSelected = details
+        "pizzaSelection": (state, action) => {
+          state.pizzaSelected = action.payload;
+        },
+
+        "modifierQuantiteIngredient": (state, action) => {
+          const { name, operation } = action.payload;
+          const ingr = state.pizzaSelected.ingredients.find(i => i.name === name);
+          if (ingr) {
+            if (ingr.quantite === undefined) ingr.quantite = 1;
+
+            if (operation === "plus" && ingr.quantite < 2) {
+              ingr.quantite += 1;
+            } else if (operation === "moins" && ingr.quantite > 0) {
+              ingr.quantite -= 1;
+            }
+
+            
+            const basePrice = state.allPizzas.find(p => p.name === state.pizzaSelected.name)?.price || state.pizzaSelected.price;
+            const supplement = state.pizzaSelected.ingredients.reduce((total, i) => {
+              return total + ((i.quantite > 1 ? 1 : 0) * (i.price || 0));
+            }, 0);
+
+            state.pizzaSelected.price = parseFloat((basePrice + supplement).toFixed(2));
           }
         },
-        modifierQuantiteIngredient: (state, action) => {
-  const { name, operation } = action.payload;
-  const ingr = state.pizzaSelected.ingredients.find(i => i.name === name);
-  if (ingr) {
-    if (ingr.quantite === undefined) ingr.quantite = 1;
 
-    if (operation === "plus" && ingr.quantite < 2) {
-      ingr.quantite += 1;
-    } else if (operation === "moins" && ingr.quantite > 0) {
-      ingr.quantite -= 1;
-    }
+        "appliquerCoupon": (state, action) => {
+          const { code } = action.payload;
+          const couponValide = state.coupon; 
+          if (couponValide) {
+            const total = state.panier.reduce((total, pizza) => {
+              return total + pizza.price * (pizza.quantite || 1);
+            }, 0);
+            state.totalPanier = parseFloat((total * 0.9).toFixed(2));
+          }
+        }
 
-    // Recalcul du prix : on ajoute seulement les suppléments (quantité > 1)
-    const basePrice = state.allPizzas.find(p => p.name === state.pizzaSelected.name)?.price || state.pizzaSelected.price;
-    const supplement = state.pizzaSelected.ingredients.reduce((total, i) => {
-      return total + ((i.quantite > 1 ? 1 : 0) * (i.price ||  0));
-    }, 0);
 
-    state.pizzaSelected.price = parseFloat((basePrice + supplement).toFixed(2));
-  }
-}
     }
 
 
 })
-export const {ajouter, supprimer, ajoutEncore, retirerPizza, pizzaSelection, modifierQuantiteIngredient} = pizzaData.actions
+export const {ajouter, supprimer, ajoutEncore, retirerPizza, pizzaSelection,modifierQuantiteIngredient, appliquerCoupon} = pizzaData.actions
 export const pizzaReducer= pizzaData.reducer

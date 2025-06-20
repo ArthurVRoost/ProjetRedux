@@ -72,6 +72,8 @@ export default function Home() {
                             <button className='close-panier' onClick={() => setShowPanier(false)}>
                                 ×
                             </button>
+                            
+                            
                             <Panier onClose={() => setShowPanier(false)} show={true} />
                         </div>
                     </div>
