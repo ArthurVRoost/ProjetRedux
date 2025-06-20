@@ -261,7 +261,8 @@ export const pizzaData = createSlice({
   }
 ],
     panier : [],
-    pizzaSelected : null
+    pizzaSelected : null,
+    ingredientSelected: null
     },
     reducers:{
         "ajouter": (state,action)=>{
@@ -288,7 +289,7 @@ export const pizzaData = createSlice({
 
         "retirerPizza" : (state, action)=>{
           const present = state.panier.find(element=>element.name===action.payload.name)
-          if (present){
+          if (present && present.quantite < 1 ){
             present.quantite -= 1
           }
         },
@@ -297,6 +298,13 @@ export const pizzaData = createSlice({
           const details = state.allPizzas.find(element=> element.name === action.payload.name)
           if (details){
             state.pizzaSelected = details
+          }
+        },
+
+        "ingredientSelection" : (state, action)=>{
+          const present = state.pizzaSelected.ingredient.find(element=>element.name===action.payload.name)
+          if (present){
+            state.ingredientSelected = present
           }
         }
     }

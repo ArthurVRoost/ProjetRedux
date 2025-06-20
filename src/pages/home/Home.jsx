@@ -4,14 +4,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Panier from '../../components/panier/Panier';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { pizzaSelection } from '../../features/pizzaSlice';
 
 export default function Home() {
     const [showPanier, setShowPanier] = useState(false);
-    
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const handleDetails = (pizza) => {
-        navigate(`/details/${pizza.name}`, { state: { pizza } })
+        dispatch(pizzaSelection(pizza))
+        navigate(`/details/${pizza.name}`)
     }
     
     const myBigPizza = useSelector(state=> state.pizza.allPizzas)
@@ -47,16 +49,17 @@ export default function Home() {
                 
                 {/* Panier desktop - affiché uniquement sur desktop */}
                 <div className='divHome3 desktop-only'>
-                    <Panier/>
+                    <Panier show={true}/>
                 </div>
                 
-                {/* Bouton Commander mobile - affiché uniquement sur mobile */}
-                {allPanier.length > 0 && (
-                    <div className='mobile-commander-btn mobile-only' onClick={() => setShowPanier(true)}>
-                        <span className='commander-text'>Commander</span>
-                        <span className='commander-count'>{totalItems}</span>
-                    </div>
-                )}
+                {/* Bouton Commander mobile - toujours présent sur mobile */}
+                <div 
+                    className={`mobile-commander-btn mobile-only ${allPanier.length === 0 ? 'disabled' : ''}`}
+                    onClick={allPanier.length > 0 ? () => setShowPanier(true) : undefined}
+                >
+                    <span className='commander-text'>Commander</span>
+                    {allPanier.length > 0 && <span className='commander-count'>{totalItems}</span>}
+                </div>
                 
                 {/* Modal Panier mobile */}
                 {showPanier && (
@@ -65,7 +68,9 @@ export default function Home() {
                             <button className='close-panier' onClick={() => setShowPanier(false)}>
                                 ×
                             </button>
-                            <Panier onClose={() => setShowPanier(false)} />
+                            
+                            
+                            <Panier onClose={() => setShowPanier(false)} show={true} />
                         </div>
                     </div>
                 )}
