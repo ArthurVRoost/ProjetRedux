@@ -49,7 +49,7 @@ export default function Home() {
                 
                 {/* Panier desktop - affiché uniquement sur desktop */}
                 <div className='divHome3 desktop-only'>
-                    <Panier/>
+                    <Panier show={true}/>
                 </div>
                 
                 {/* Bouton Commander mobile - toujours présent sur mobile */}
@@ -68,7 +68,7 @@ export default function Home() {
                             <button className='close-panier' onClick={() => setShowPanier(false)}>
                                 ×
                             </button>
-                            <Panier onClose={() => setShowPanier(false)} />
+                            <Panier onClose={() => setShowPanier(false)} show={true} />
                         </div>
                     </div>
                 )}
