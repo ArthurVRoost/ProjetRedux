@@ -4,14 +4,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Panier from '../../components/panier/Panier';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { pizzaSelection } from '../../features/pizzaSlice';
 
 export default function Home() {
     const [showPanier, setShowPanier] = useState(false);
-    
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const handleDetails = (pizza) => {
-        navigate(`/details/${pizza.name}`, { state: { pizza } })
+        dispatch(pizzaSelection(pizza))
+        navigate(`/details/${pizza.name}`)
     }
     
     const myBigPizza = useSelector(state=> state.pizza.allPizzas)

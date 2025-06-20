@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Panier from '../../components/panier/Panier';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ajouter } from '../../features/pizzaSlice';
 
 
@@ -16,6 +16,7 @@ export default function Details() {
         navigate(-1) 
     } 
     const dispatch = useDispatch()
+    const selectedPizza = useSelector(state=> state.pizza.pizzaSelected)
     return (
         <>
         <div className='divPage'>
@@ -28,20 +29,20 @@ export default function Details() {
             
             <div className="divDetails">
                 <div className="imgPizza">
-                    <img src={pizza.image} alt="Pizza" />
+                    <img src={selectedPizza.image} alt="Pizza" />
                 </div>
                 <div className="rightDiv">
                     <div className="title">
-                        <h1>{pizza.name}</h1>
-                        <span>€{pizza.price.toFixed(2)}</span>
+                        <h1>{selectedPizza.name}</h1>
+                        <span>€{selectedPizza.price.toFixed(2)}</span>
                     </div>
                     <div className='description'>
-                        {pizza.description}
+                        {selectedPizza.description}
                     </div>
                     <div className="ingredients">
                     <h2>Ingrédients</h2>
                     <ul>
-                        {pizza.ingredients.map((element,index )=>(
+                        {selectedPizza.ingredients.map((element,index )=>(
                             <div className='detailsDivMap'>
                                 <div>
                                     <li className='listIngredient' key={index}><span>{element.name}</span></li>
@@ -58,10 +59,10 @@ export default function Details() {
                         
                     </ul>
                     </div>
-                    <div className="ajoutPanier" onClick={()=> dispatch(ajouter(pizza),console.log(pizza)
+                    <div className="ajoutPanier" onClick={()=> dispatch(ajouter(selectedPizza),handleBackClick()
                     )}>
                         <span className="ajouterAuPanier">Ajouter au panier</span>
-                        <span className="prixAjoutPanier">{pizza.price.toFixed(2)}</span>
+                        <span className="prixAjoutPanier">{selectedPizza.price.toFixed(2)}</span>
                     </div>
                 </div>
             </div>

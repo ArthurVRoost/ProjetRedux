@@ -1,167 +1,21 @@
-// import { useState } from "react"
-// import "./panier.css"
-// import data from '../../data/data.json'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faMotorcycle } from '@fortawesome/free-solid-svg-icons';
-// import { useSelector } from "react-redux";
-
-// export default function Panier() {
-//     const [added, setAdded] = useState(true)
-//     const [paiement, setPaiement] = useState(false)
-//     const [quantity, setQuantity] = useState(1)
-//     const [couponCode, setCouponCode] = useState("")
-    
-    
-//     const allPanier = useSelector(state=> state.pizza.panier)
-//     console.log(allPanier);
-    
-//     const handleQuantityChange = (change) => {
-//         const newQuantity = quantity + change
-//         if (newQuantity > 0) {
-//             setQuantity(newQuantity)
-//         }
-//     }
-
-//     return (<>
-    
-
-//         <div className="panierAll">
-
-
-        
-//             <div className="panierCard">
-//                 <div className="contentPanier">
-//                     <h1>Panier d'achat</h1>
-
-                
-
-//                     {added ? (<>
-//                         {/* <div className="pizzaPanier">
-//                             <div className="nameAndPrice">
-//                                 <h3>{allPanier.name}</h3>
-//                                 <span className="price"></span>
-//                             </div>
-                            
-//                             <p className="ingredientSuppr">Sans champignons</p>
-
-//                             <div className="addPizza">
-//                                 <div className="compteur">
-//                                     <button onClick={() => handleQuantityChange(-1)}>-</button>
-//                                     <span></span>
-//                                     <button onClick={() => handleQuantityChange(1)}>+</button>
-//                                 </div>
-
-//                                 <div className="modifier">
-//                                     <span className="modifierBtn">Modifier</span>
-//                                     <span className="suppr" onClick={() => setAdded(false)}>Supprimer</span>
-//                                 </div>
-//                             </div>
-//                         </div> */}
-//                         {allPanier.map((element,index)=>(
-//                             <>
-//                             <div className="pizzaPanier">
-//                             <div className="nameAndPrice">
-//                                { console.log(element)}
-                                
-//                                 <h3>{element.name}</h3>
-//                                 <span className="price"></span>
-//                             </div>
-                            
-//                             <p className="ingredientSuppr">Sans champignons</p>
-
-//                             <div className="addPizza">
-//                                 <div className="compteur">
-//                                     <button onClick={() => handleQuantityChange(-1)}>-</button>
-//                                     <span>{element.quantite}</span>
-//                                     <button onClick={() => handleQuantityChange(1)}>+</button>
-//                                 </div>
-
-//                                 <div className="modifier">
-//                                     <span className="modifierBtn">Modifier</span>
-//                                     <span className="suppr" onClick={() => setAdded(false)}>Supprimer</span>
-//                                 </div>
-//                             </div>
-//                         </div>
-//                             </>
-//                         ))}
-//                         </>
-//                     ) : (
-//                         <div className="panierVide">
-//                             <p>Panier vide</p>
-//                         </div>
-//                     )}
-
-                    
-//                     {!paiement && added && (
-//                         <div className="couponDiv">
-//                             <input 
-//                                 type="text" 
-//                                 placeholder="Vous pouvez entrer votre coupon"
-//                                 value={couponCode}
-//                                 onChange={(e) => setCouponCode(e.target.value)}
-//                             />
-//                             <button>AJOUTER</button>
-//                         </div>
-//                     )}
-//                 </div>
-
-                
-//                 <div className="footerPanier">
-//                     <div className="totalPrix">
-//                         {/* {totalPrice < minimumOrder && <div className="label livraison">
-//                             <span>Livraison</span>
-//                             <span></span>
-//                         </div>} */}
-                        
-//                         <div className="label">
-//                             <strong>Total</strong>
-//                             {/* <strong>€{added ? totalPrice.toFixed(2): '0,00'}</strong> */}
-//                         </div>
-//                     </div>
-
-                
-
-                    
-                    
-//                 </div>
-                    
-//                 </div>
-//                 <div className="btnCommander">
-//                                 <span className="quantite">{added ? quantity : 0}</span>
-//                                 <span className="commander">Commander</span>
-//                                {/* ` <span className="prixFinal">€{added ? totalPrice.toFixed(2) : '0,00'}</span>` */}
-//                         </div>
-
-//                         {/* {totalPrice < minimumOrder && (
-//                             <div className="commandeMinimum">
-//                                 <FontAwesomeIcon icon={faMotorcycle} />
-//                                 <div className="text">
-//                                     <h4>Commander</h4>
-//                                     <p>Livraison à partir d'un montant minimum de commande de €{minimumOrder}.</p>
-//                                 </div>
-//                             </div>
-//                         )} */}
-//         </div>
-//         </>
-//     )
-// }
-
 import { useState } from "react"
 import "./panier.css"
 import data from '../../data/data.json'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMotorcycle } from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from "react-redux";
+import { ajoutEncore, pizzaSelection, retirerPizza, supprimer } from "../../features/pizzaSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function Panier({ onClose }) {
     const [added, setAdded] = useState(true)
     const [paiement, setPaiement] = useState(false)
     const [quantity, setQuantity] = useState(1)
     const [couponCode, setCouponCode] = useState("")
-    
+    const navigate = useNavigate()
     const dispatch = useDispatch();
     const allPanier = useSelector(state => state.pizza.panier)
-    console.log(allPanier);
+
     
     const handleQuantityChange = (change, itemIndex) => {
         // Cette fonction devrait mettre à jour la quantité dans Redux
@@ -188,7 +42,10 @@ export default function Panier({ onClose }) {
             onClose(); // Fermer le modal sur mobile après commande
         }
     }
-
+    const handleDetails = (pizza) => {
+            dispatch(pizzaSelection(pizza))
+            navigate(`/details/${pizza.name}`)
+        }
     // Calculer le total
     const calculateTotal = () => {
         return allPanier.reduce((total, item) => {
@@ -219,14 +76,15 @@ export default function Panier({ onClose }) {
 
                                     <div className="addPizza">
                                         <div className="compteur">
-                                            <button onClick={() => handleQuantityChange(-1, index)}>-</button>
+                                            <button onClick={() => dispatch(retirerPizza(element)) }>-</button>
                                             <span>{element.quantite || 1}</span>
-                                            <button onClick={() => handleQuantityChange(1, index)}>+</button>
+                                            <button onClick={() =>dispatch(ajoutEncore(element)) }>+</button>
                                         </div>
-
+                                        {console.log(element)}
                                         <div className="modifier">
-                                            <span className="modifierBtn">Modifier</span>
-                                            <span className="suppr" onClick={() => handleRemoveItem(index)}>Supprimer</span>
+                                            <span className="modifierBtn" onClick={()=>handleDetails(element)
+                                            }>Modifier</span>
+                                            <span className="suppr" onClick={() =>dispatch(supprimer(element)) }>Supprimer</span>
                                         </div>
                                     </div>
                                 </div>
