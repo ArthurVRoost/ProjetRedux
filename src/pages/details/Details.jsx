@@ -4,8 +4,8 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Panier from '../../components/panier/Panier';
 import { useDispatch, useSelector } from 'react-redux';
-import { ajouter } from '../../features/pizzaSlice';
-import { useEffect } from 'react';
+import { ajouter, modifierQuantiteIngredient } from '../../features/pizzaSlice';
+import { useEffect, useState } from 'react';
 
 
 export default function Details() {
@@ -16,11 +16,26 @@ export default function Details() {
     const handleBackClick = () => {
         navigate(-1) 
     } 
+
+    const location = useLocation()
     const handleGoHome = () => {
         navigate('/');
     }
     const dispatch = useDispatch()
     const selectedPizza = useSelector(state=> state.pizza.pizzaSelected)
+   const pizzaToAdd = {
+    ...selectedPizza,
+    customIngredients: selectedPizza.ingredients
+        .filter(i => i.quantite !== undefined && i.quantite !== 1)
+        .map(i => ({
+        name: i.name,
+        type: i.quantite === 0 ? "sans" : "supplément"
+        })),
+    idPanier: selectedPizza.idPanier ?? Date.now() 
+    };
+
+
+
     useEffect(() => {
     document.body.classList.add('details-page');
     
@@ -28,6 +43,9 @@ export default function Details() {
       document.body.classList.remove('details-page');
     };
   }, []);
+
+    {console.log(location)
+    }
     return (
         <>
         <div className='divPage'>
@@ -55,26 +73,47 @@ export default function Details() {
                     </div>
                     <div className="ingredients">
                     <h2>Ingrédients</h2>
-                    <ul>
-                        {selectedPizza.ingredients.map((element,index )=>(
-                            <div className='detailsDivMap'>
+                 
+                        <ul>
+                        {selectedPizza.ingredients.map((element, index) => (
+                            <div className='detailsDivMap' key={index}>
                                 <div>
-                                    <li className='listIngredient' key={index}><span>{element.name}</span></li>
+                                    <li className='listIngredient'><span>{element.name}</span></li>
                                 </div>
                                 <div className="compteurDetails">
-                                    <button className='btnMoins'>-</button>
-                                    <span>1</span>
-                                    <button className='btnPlus' >+</button>
+                                    <button
+                                        className={`btnMoins ${element.quantite=== 0 ? 'disabled' : ''}`}
+                                        onClick={() => dispatch(modifierQuantiteIngredient({ name: element.name, operation: "moins" }))}
+                                        disabled={element.quantite === 0}
+                                    >
+                                        -
+                                    </button>
+                                    <span>{element.quantite ?? 1}</span>
+                                    <button
+                                        className={`btnPlus ${element.quantite === 2 ? 'disabled' : ''}`}
+                                        onClick={() => dispatch(modifierQuantiteIngredient({ name: element.name, operation: "plus" }))}
+                                        disabled={element.quantite === 2}
+                                    >
+                                        +
+                                    </button>
                                 </div>
                             </div>
                         ))}
 
-                        
-                        
+
+
                     </ul>
+                        
+                    
                     </div>
-                    <div className="ajoutPanier" onClick={()=> dispatch(ajouter(selectedPizza),handleBackClick()
-                    )}>
+                    <div
+                    className="ajoutPanier"
+                    onClick={() => {
+                        dispatch(ajouter(pizzaToAdd));
+                        handleBackClick();
+                    }}
+                    >
+
                         <span className="ajouterAuPanier">Ajouter au panier</span>
                         <span className="prixAjoutPanier">{selectedPizza.price.toFixed(2)}</span>
                     </div>

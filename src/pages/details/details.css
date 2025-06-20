@@ -170,13 +170,24 @@
 }
 
 
+
 .ajoutPanier:hover {
     background-color: #558b2f;
 
 }
 
 
+.btnMoins.disabled,
+.btnPlus.disabled {
+  background-color: #ccc;
+  color: #777;
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.6;
 
+  }
+
+  
 .ajoutPanier .ajouterAuPanier {
     font-size: 16px;
     font-weight: 700;

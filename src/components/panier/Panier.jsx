@@ -3,7 +3,7 @@
 import { useState } from "react"
 import "./panier.css"
 import { useSelector, useDispatch } from "react-redux";
-import { ajoutEncore, pizzaSelection, retirerPizza, supprimer } from "../../features/pizzaSlice";
+import { ajoutEncore, pizzaSelection, retirerPizza, supprimer,appliquerCoupon } from "../../features/pizzaSlice";
 
 import { useNavigate } from "react-router-dom";
 
@@ -15,6 +15,17 @@ export default function Panier({ onClose, show }) {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const allPanier = useSelector(state => state.pizza.panier)
+    const totalPanier = useSelector(state => state.pizza.totalPanier);
+    const realCoupon = useSelector(state => state.pizza.coupon)
+
+    const applyCoupon = () => {
+        console.log(realCoupon, couponCode, totalPanier)
+        
+        if (realCoupon == couponCode)
+            dispatch(appliquerCoupon({ code: couponCode }));
+
+    }
+
 
     const handleCommander = () => {
         // Logique de commande
@@ -57,7 +68,17 @@ return (
                                             <span className="price">€{(element.price * (element.quantite || 1)).toFixed(2)}</span>
                                         </div>
 
-                                        <p className="ingredientSuppr">Sans champignons</p>
+                                        {element.customIngredients && element.customIngredients.length > 0 && (
+                                        <p className="ingredientSuppr">
+                                            {element.customIngredients.map((i, idx) => (
+                                            <span key={idx}>
+                                                {i.type === "sans" ? `Sans ${i.name}` : `Supplément ${i.name}`}
+                                                {idx < element.customIngredients.length - 1 && ', '}
+                                            </span>
+                                            ))}
+                                        </p>
+                                        )}
+
 
                                         <div className="addPizza">
                                             <div className="compteur">
@@ -88,7 +109,7 @@ return (
                                     value={couponCode}
                                     onChange={(e) => setCouponCode(e.target.value)}
                                 />
-                                <button>AJOUTER</button>
+                                <button onClick={applyCoupon}>AJOUTER</button>
                             </div>
                         )}
                     </div>
@@ -98,7 +119,10 @@ return (
                             <div className="totalPrix">
                                 <div className="label">
                                     <strong>Total</strong>
-                                    <strong>€{totalPrice.toFixed(2)}</strong>
+                                    <strong>
+                                        {totalPanier.toFixed(2)}
+
+                                        </strong>
                                 </div>
                             </div>
                         </div>
@@ -110,7 +134,7 @@ return (
                     <div className="btnCommander" onClick={handleCommander}>
                         <span className="quantite">{totalItems}</span>
                         <span className="commander">Commander</span>
-                        <span className="prixFinal">€{totalPrice.toFixed(2)}</span>
+                        <span className="prixFinal">€{totalPanier.toFixed(2)}</span>
                     </div>
                 )}
             </>
@@ -129,7 +153,16 @@ return (
                                         <span className="price">€{(element.price * (element.quantite || 1)).toFixed(2)}</span>
                                     </div>
 
-                                    <p className="ingredientSuppr">Sans champignons</p>
+                                    {element.customIngredients && element.customIngredients.length > 0 && (
+                                        <p className="ingredientSuppr">
+                                            {element.customIngredients.map((i, idx) => (
+                                            <span key={idx}>
+                                                {i.type === "sans" ? `Sans ${i.name}` : `Supplément ${i.name}`}
+                                                {idx < element.customIngredients.length - 1 && ', '}
+                                            </span>
+                                            ))}
+                                        </p>
+                                        )}
                                 </div>
                             ))}
                         </>
