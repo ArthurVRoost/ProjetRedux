@@ -9,9 +9,6 @@
     height: 720px;
     margin-left: -10%;
 }
-
-
-
 .returnDiv{
     display: flex;
     gap: 5px;
@@ -29,7 +26,6 @@
     text-decoration: underline;
     cursor: pointer;
 }
-
 
 .divDetails {
     background-color: white;
@@ -194,4 +190,77 @@
 .detailsDivMap{
     display: flex;
     justify-content: space-between;
+}
+.mobileHeader {
+    display: none;
+}
+@media (max-width:768px) {
+    body{
+        overflow-x: hidden;
+    }
+    .divDetails{
+        flex-direction: column;
+        height: 100%;
+        margin-top: -8%;
+        margin-left: 8%;
+
+    }
+    
+    body.details-page .contentPanier {
+        display: none;
+    }
+    body.details-page .panierAll {
+        display: none;
+    }
+    .imgPizza {
+        width: 90%;
+        height: 100px;
+    }
+    .ajoutPanier{
+        position: fixed;
+        bottom: 20;
+    }
+    .title{
+        margin-left: 2%;
+    }
+    .description{
+        margin-left: 2%;
+    }
+    .ingredients{
+        margin-left: 2%;
+    }
+    .returnDiv {
+        display: none;
+    }
+
+    .mobileHeader {
+        display: flex;
+        position: absolute;
+        top: -10;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        background-color: rgba(0, 0, 0, 0.344);
+        align-items: center;
+        justify-content: space-around;
+        z-index: 2;
+        gap: 50px;
+    }
+
+    .closeIcon {
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        width: 80%;
+        margin-left: 40%;
+    }
+    .detailsX{
+        background-color: white;
+        color: black;
+        border-radius: 50%;
+        font-size: 14px;
+        padding: 5px 10px;
+
+        margin-left: 10%;
+    }
 }

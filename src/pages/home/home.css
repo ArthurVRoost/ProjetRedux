@@ -15,7 +15,7 @@
     gap: 50px;
     flex-basis: 65%;
     font-family: "Nunito sans";
-    cursor: pointer;
+
     width: 65%;
 }
 
@@ -27,6 +27,7 @@
     position: relative;
     width: 270px;
     transition: transform 0.3s ease;
+    cursor: pointer;
 }
 
 .homeImg {
@@ -294,6 +295,7 @@
     .desktop-only {
         display: none !important;
     }
+    
     .homeImg{
         width: 85%;
         height: 250px;
@@ -356,5 +358,8 @@
         width: 80%;
         border-radius: 10px;
         justify-content: center;
+    }
+    .commander-button {
+        display: block !important;
     }
 }

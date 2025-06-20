@@ -16,7 +16,6 @@ export default function Panier({ onClose, show }) {
     const dispatch = useDispatch();
     const allPanier = useSelector(state => state.pizza.panier)
 
-
     const handleCommander = () => {
         // Logique de commande
         console.log("Commande passée!");

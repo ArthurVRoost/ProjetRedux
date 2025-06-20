@@ -5,6 +5,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Panier from '../../components/panier/Panier';
 import { useDispatch, useSelector } from 'react-redux';
 import { ajouter } from '../../features/pizzaSlice';
+import { useEffect } from 'react';
 
 
 export default function Details() {
@@ -15,8 +16,18 @@ export default function Details() {
     const handleBackClick = () => {
         navigate(-1) 
     } 
+    const handleGoHome = () => {
+        navigate('/');
+    }
     const dispatch = useDispatch()
     const selectedPizza = useSelector(state=> state.pizza.pizzaSelected)
+    useEffect(() => {
+    document.body.classList.add('details-page');
+    
+    return () => {
+      document.body.classList.remove('details-page');
+    };
+  }, []);
     return (
         <>
         <div className='divPage'>
@@ -28,6 +39,9 @@ export default function Details() {
             </div>
             
             <div className="divDetails">
+                <div className="mobileHeader">
+                    <span className="closeIcon" onClick={handleGoHome}>{selectedPizza.name}<span className='detailsX'>✕</span></span>
+                </div>
                 <div className="imgPizza">
                     <img src={selectedPizza.image} alt="Pizza" />
                 </div>
