@@ -298,10 +298,31 @@ export const pizzaData = createSlice({
           if (details){
             state.pizzaSelected = details
           }
-        }
+        },
+        modifierQuantiteIngredient: (state, action) => {
+  const { name, operation } = action.payload;
+  const ingr = state.pizzaSelected.ingredients.find(i => i.name === name);
+  if (ingr) {
+    if (ingr.quantite === undefined) ingr.quantite = 1;
+
+    if (operation === "plus" && ingr.quantite < 2) {
+      ingr.quantite += 1;
+    } else if (operation === "moins" && ingr.quantite > 0) {
+      ingr.quantite -= 1;
+    }
+
+    // Recalcul du prix : on ajoute seulement les suppléments (quantité > 1)
+    const basePrice = state.allPizzas.find(p => p.name === state.pizzaSelected.name)?.price || state.pizzaSelected.price;
+    const supplement = state.pizzaSelected.ingredients.reduce((total, i) => {
+      return total + ((i.quantite > 1 ? 1 : 0) * (i.price ||  0));
+    }, 0);
+
+    state.pizzaSelected.price = parseFloat((basePrice + supplement).toFixed(2));
+  }
+}
     }
 
 
 })
-export const {ajouter, supprimer, ajoutEncore, retirerPizza, pizzaSelection} = pizzaData.actions
+export const {ajouter, supprimer, ajoutEncore, retirerPizza, pizzaSelection, modifierQuantiteIngredient} = pizzaData.actions
 export const pizzaReducer= pizzaData.reducer

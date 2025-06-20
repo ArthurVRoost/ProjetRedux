@@ -174,12 +174,13 @@
     background-color: #558b2f;
 
 }
-
 .btnMoins.disabled,
 .btnPlus.disabled {
-  opacity: 0.5;
+  background-color: #ccc;
+  color: #777;
   cursor: not-allowed;
   pointer-events: none;
+  opacity: 0.6;
 }
 
 .ajoutPanier .ajouterAuPanier {

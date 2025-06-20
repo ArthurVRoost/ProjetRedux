@@ -4,7 +4,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Panier from '../../components/panier/Panier';
 import { useDispatch, useSelector } from 'react-redux';
-import { ajouter } from '../../features/pizzaSlice';
+import { ajouter, modifierQuantiteIngredient } from '../../features/pizzaSlice';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
@@ -29,19 +29,7 @@ export default function Details() {
       document.body.classList.remove('details-page');
     };
   }, []);
-    const [quantities, setQuantities] = useState(
-        selectedPizza.ingredients.map(() => 1)
-    );
-
-   
-    const decrement = (index) => {
-        setQuantities(prev => prev.map((q, i) => i === index && q > 0 ? q - 1 : q));
-    };
-
     
-    const increment = (index) => {
-        setQuantities(prev => prev.map((q, i) => i === index && q < 2 ? q + 1 : q));
-    };
     return (
         <>
         <div className='divPage'>
@@ -70,34 +58,33 @@ export default function Details() {
                     <div className="ingredients">
                     <h2>Ingrédients</h2>
                     <ul>
-                        {selectedPizza.ingredients.map((element, index) => (
+  {selectedPizza.ingredients.map((element, index) => (
     <div className='detailsDivMap' key={index}>
-        <div>
-            <li className='listIngredient'><span>{element.name}</span></li>
-        </div>
-        <div className="compteurDetails">
-            <button
-                className={`btnMoins ${quantities[index] === 0 ? 'disabled' : ''}`}
-                onClick={() => decrement(index)}
-                disabled={quantities[index] === 0}
-            >
-                -
-            </button>
-            <span>{quantities[index]}</span>
-            <button
-                className={`btnPlus ${quantities[index] === 2 ? 'disabled' : ''}`}
-                onClick={() => increment(index)}
-                disabled={quantities[index] === 2}
-            >
-                +
-            </button>
-        </div>
+      <div>
+        <li className='listIngredient'>
+          <span>{element.name}</span>
+        </li>
+      </div>
+      <div className="compteurDetails">
+        <button
+          className={`btnMoins ${element.quantite === 0 ? 'disabled' : ''}`}
+          onClick={() => dispatch(modifierQuantiteIngredient({ name: element.name, operation: "moins" }))}
+          disabled={element.quantite === 0}
+        >
+          -
+        </button>
+        <span>{element.quantite ?? 1}</span>
+        <button
+          className={`btnPlus ${element.quantite === 2 ? 'disabled' : ''}`}
+          onClick={() => dispatch(modifierQuantiteIngredient({ name: element.name, operation: "plus" }))}
+          disabled={element.quantite === 2}
+        >
+          +
+        </button>
+      </div>
     </div>
-))}
-
-                        
-                        
-                    </ul>
+  ))}
+</ul>
                     </div>
                     <div className="ajoutPanier" onClick={()=> dispatch(ajouter(selectedPizza),handleBackClick()
                     )}>
