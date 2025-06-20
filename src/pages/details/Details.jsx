@@ -6,6 +6,7 @@ import Panier from '../../components/panier/Panier';
 import { useDispatch, useSelector } from 'react-redux';
 import { ajouter } from '../../features/pizzaSlice';
 import { useEffect } from 'react';
+import { useState } from 'react';
 
 
 export default function Details() {
@@ -28,6 +29,19 @@ export default function Details() {
       document.body.classList.remove('details-page');
     };
   }, []);
+    const [quantities, setQuantities] = useState(
+        selectedPizza.ingredients.map(() => 1)
+    );
+
+   
+    const decrement = (index) => {
+        setQuantities(prev => prev.map((q, i) => i === index && q > 0 ? q - 1 : q));
+    };
+
+    
+    const increment = (index) => {
+        setQuantities(prev => prev.map((q, i) => i === index && q < 2 ? q + 1 : q));
+    };
     return (
         <>
         <div className='divPage'>
@@ -56,18 +70,30 @@ export default function Details() {
                     <div className="ingredients">
                     <h2>Ingrédients</h2>
                     <ul>
-                        {selectedPizza.ingredients.map((element,index )=>(
-                            <div className='detailsDivMap'>
-                                <div>
-                                    <li className='listIngredient' key={index}><span>{element.name}</span></li>
-                                </div>
-                                <div className="compteurDetails">
-                                    <button className='btnMoins'>-</button>
-                                    <span>1</span>
-                                    <button className='btnPlus' >+</button>
-                                </div>
-                            </div>
-                        ))}
+                        {selectedPizza.ingredients.map((element, index) => (
+    <div className='detailsDivMap' key={index}>
+        <div>
+            <li className='listIngredient'><span>{element.name}</span></li>
+        </div>
+        <div className="compteurDetails">
+            <button
+                className={`btnMoins ${quantities[index] === 0 ? 'disabled' : ''}`}
+                onClick={() => decrement(index)}
+                disabled={quantities[index] === 0}
+            >
+                -
+            </button>
+            <span>{quantities[index]}</span>
+            <button
+                className={`btnPlus ${quantities[index] === 2 ? 'disabled' : ''}`}
+                onClick={() => increment(index)}
+                disabled={quantities[index] === 2}
+            >
+                +
+            </button>
+        </div>
+    </div>
+))}
 
                         
                         
