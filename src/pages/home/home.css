@@ -244,35 +244,53 @@
     color: #212529;
 }
 
-/* Styles pour le panier en mode responsive */
+
 @media (max-width: 768px) {
     .desktop-only {
         display: none !important;
     }
-    
+    .homeImg{
+        width: 80%;
+    }
     .mobile-only {
         display: block !important;
     }
-    
+    .homeNom{
+        font-size: 14px;
+    }
+    .homeP1{
+        font-size: 12px;
+    }
+    .homeDescription p{
+        margin-bottom: 0;
+    }
+    .homePrix{
+        font-size: 12px;
+    }
+    .homeIcon{
+        font-size: 12px;
+        padding: 5px;
+    }
     .divHome {
         margin-left: 5%;
-        margin-top: 5%;
-        width: 90%;
+        margin-top: 35%;
+        width: 100%;
         gap: 30px;
-        margin-bottom: 100px; /* Espace pour le bouton commander */
+        margin-bottom: 100px; 
     }
     
     .homeDivP {
         width: 100%;
-        max-width: 300px;
+        max-width: 200px;
         margin: 0 auto;
     }
     
     .homeDiv1 {
-        width: calc(100% - 20px);
+        width: 150px;
+        height: 50px;
+        margin-bottom: 0;
     }
     
-    /* Panier en mode modal mobile */
     .panier-modal-content .panierAll {
         position: static;
         width: 100%;
