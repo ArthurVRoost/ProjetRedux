@@ -58,8 +58,7 @@ export default function Details() {
                         
                     </ul>
                     </div>
-                    <div className="ajoutPanier" onClick={()=> dispatch(ajouter(pizza),console.log(pizza)
-                    )}>
+                    <div className="ajoutPanier" onClick={()=> dispatch(ajouter(pizza),handleBackClick)}>
                         <span className="ajouterAuPanier">Ajouter au panier</span>
                         <span className="prixAjoutPanier">{pizza.price.toFixed(2)}</span>
                     </div>
