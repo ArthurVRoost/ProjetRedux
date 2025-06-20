@@ -50,13 +50,14 @@ export default function Home() {
                     <Panier/>
                 </div>
                 
-                {/* Bouton Commander mobile - affiché uniquement sur mobile */}
-                {allPanier.length > 0 && (
-                    <div className='mobile-commander-btn mobile-only' onClick={() => setShowPanier(true)}>
-                        <span className='commander-text'>Commander</span>
-                        <span className='commander-count'>{totalItems}</span>
-                    </div>
-                )}
+                {/* Bouton Commander mobile - toujours présent sur mobile */}
+                <div 
+                    className={`mobile-commander-btn mobile-only ${allPanier.length === 0 ? 'disabled' : ''}`}
+                    onClick={allPanier.length > 0 ? () => setShowPanier(true) : undefined}
+                >
+                    <span className='commander-text'>Commander</span>
+                    {allPanier.length > 0 && <span className='commander-count'>{totalItems}</span>}
+                </div>
                 
                 {/* Modal Panier mobile */}
                 {showPanier && (

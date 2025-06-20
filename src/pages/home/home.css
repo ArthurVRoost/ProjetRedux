@@ -243,18 +243,63 @@
     background-color: #e9ecef;
     color: #212529;
 }
+.mobile-commander-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #689f38;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 15px rgba(104, 159, 56, 0.3);
+    z-index: 1000;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    font-family: "Nunito Sans", sans-serif;
+}
 
+.mobile-commander-btn:hover:not(.disabled) {
+    background-color: #4c6f01;
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 6px 20px rgba(104, 159, 56, 0.4);
+}
+
+.mobile-commander-btn.disabled {
+    background-color: #C6DA99;
+    color: #ffffff;
+    cursor: not-allowed;
+    box-shadow: 0 4px 15px rgba(204, 204, 204, 0.3);
+}
+
+.mobile-commander-btn.disabled:hover {
+    background-color: #cccccc;
+    transform: translateX(-50%);
+    box-shadow: 0 4px 15px rgba(204, 204, 204, 0.3);
+}
+
+.commander-text {
+    font-size: 16px;
+    font-weight: 700;
+}
 
 @media (max-width: 768px) {
+    .body{
+        overflow-x: hidden;
+    }
     .desktop-only {
         display: none !important;
     }
     .homeImg{
-        width: 80%;
+        width: 85%;
+        height: 250px;
+        object-fit: cover;
     }
-    .mobile-only {
-        display: block !important;
-    }
+    
     .homeNom{
         font-size: 14px;
     }
@@ -263,6 +308,7 @@
     }
     .homeDescription p{
         margin-bottom: 0;
+        font-size: 12px;
     }
     .homePrix{
         font-size: 12px;
@@ -281,12 +327,11 @@
     
     .homeDivP {
         width: 100%;
-        max-width: 200px;
-        margin: 0 auto;
+        max-width: 230px;
     }
     
     .homeDiv1 {
-        width: 150px;
+        width: 176px;
         height: 50px;
         margin-bottom: 0;
     }
@@ -306,5 +351,10 @@
     
     .panier-modal-content .btnCommander {
         margin-top: auto;
+    }
+    .mobile-commander-btn{
+        width: 80%;
+        border-radius: 10px;
+        justify-content: center;
     }
 }
