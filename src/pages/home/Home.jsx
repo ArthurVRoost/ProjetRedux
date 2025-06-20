@@ -1,5 +1,5 @@
 import './home.css'
-
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Panier from '../../components/panier/Panier';
@@ -7,12 +7,19 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 export default function Home() {
+    const [showPanier, setShowPanier] = useState(false);
     
     const navigate = useNavigate()
     const handleDetails = (pizza) => {
-    navigate(`/details/${pizza.name}`, { state: { pizza } })
-}
+        navigate(`/details/${pizza.name}`, { state: { pizza } })
+    }
+    
     const myBigPizza = useSelector(state=> state.pizza.allPizzas)
+    const allPanier = useSelector(state=> state.pizza.panier)
+    
+    // Calculer le nombre total d'articles dans le panier
+    const totalItems = allPanier.reduce((total, item) => total + (item.quantite || 1), 0);
+    
     return(
         <>
             <div className='pageHome'>
@@ -30,21 +37,39 @@ export default function Home() {
                                         <p className='homeP1'>à partir de</p>
                                         <p className='homePrix'>€{pizza.price.toFixed(2)}</p>
                                         
-                                        
                                         <FontAwesomeIcon onClick={() => handleDetails(pizza)} className='homeIcon'  icon={faPlus} />
                                     </div>
-                                    
                                 </div>
                             </div>
                         </div>
                     ))}
                 </div>
-                <div className='divHome3'>
+                
+                {/* Panier desktop - affiché uniquement sur desktop */}
+                <div className='divHome3 desktop-only'>
                     <Panier/>
                 </div>
                 
+                {/* Bouton Commander mobile - affiché uniquement sur mobile */}
+                {allPanier.length > 0 && (
+                    <div className='mobile-commander-btn mobile-only' onClick={() => setShowPanier(true)}>
+                        <span className='commander-text'>Commander</span>
+                        <span className='commander-count'>{totalItems}</span>
+                    </div>
+                )}
+                
+                {/* Modal Panier mobile */}
+                {showPanier && (
+                    <div className='panier-modal'>
+                        <div className='panier-modal-content'>
+                            <button className='close-panier' onClick={() => setShowPanier(false)}>
+                                ×
+                            </button>
+                            <Panier onClose={() => setShowPanier(false)} />
+                        </div>
+                    </div>
+                )}
             </div>
-          
         </>
     )
 }
