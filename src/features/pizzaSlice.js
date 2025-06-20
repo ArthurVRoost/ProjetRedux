@@ -273,6 +273,30 @@ export const pizzaData = createSlice({
                     ...action.payload,
                     quantite:1})
             }
+        },
+        "supprimer" : (state, action)=>{
+            state.panier = state.panier.filter(element => element.name !== action.payload.name)
+        },
+
+        "ajoutEncore": (state, action)=>{
+          const present = state.panier.find(element=>element.name===action.payload.name)
+            if (present) {
+                present.quantite+=1
+            }
+        },
+
+        "retirerPizza" : (state, action)=>{
+          const present = state.panier.find(element=>element.name===action.payload.name)
+          if (present){
+            present.quantite -= 1
+          }
+        },
+
+        "pizzaSelection" : (state, action)=>{
+          const details = state.allPizzas.find(element=> element.name === action.payload.name)
+          if (details){
+            state.pizzaSelected = details
+          }
         }
     }
 
