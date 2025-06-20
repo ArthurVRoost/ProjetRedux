@@ -47,3 +47,35 @@
 .navDiv2Icon{
     cursor: pointer;
 }
+@media (max-width:768px) {
+    .navDiv{
+        position: relative;
+        justify-content: space-between;
+        height: 130px;
+        margin: 0;
+    }
+    .navDiv1{
+        position: absolute;
+        top: 60px;
+        width: 100%;
+        gap: 10px;
+        justify-content: center;
+        margin-left: 3%;
+    }
+    .navDiv1::after{
+        content: "";
+        width: 33px;
+        height: 3px;
+        background-color: white;
+        position: absolute;
+        bottom: 13%;
+        left: 36.2%;
+    }
+    .imgNav{
+        margin-top: -10%;
+    }
+    .navDiv2{
+        margin-top: -10%;
+        margin-right: 3%;
+    }
+}
