@@ -215,7 +215,7 @@
         height: 100%;
         margin-top: -8%;
         margin-left: 8%;
-
+        width: 100vw;
     }
     
     body.details-page .contentPanier {
