@@ -61,7 +61,7 @@ export default function Details() {
                     <span className="closeIcon" onClick={handleGoHome}>{selectedPizza.name}<span className='detailsX'>✕</span></span>
                 </div>
                 <div className="imgPizza">
-                    <img src={selectedPizza.image} alt="Pizza" />
+                    <img className='imgPizza1' src={selectedPizza.image} alt="Pizza" />
                 </div>
                 <div className="rightDiv">
                     <div className="title">

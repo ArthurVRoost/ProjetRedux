@@ -324,7 +324,7 @@
         padding: 5px;
     }
     .divHome {
-        margin-left: 5%;
+        margin-left: 3%;
         margin-top: 15%;
         width: 100%;
         gap: 30px;
@@ -332,12 +332,11 @@
     }
     
     .homeDivP {
-        width: 100%;
-        max-width: 230px;
+        width: 40%;
     }
     
     .homeDiv1 {
-        width: 176px;
+        width: 156px;
         height: 50px;
         margin-bottom: 0;
     }

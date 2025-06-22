@@ -54,6 +54,7 @@
         justify-content: space-between;
         height: 130px;
         margin: 0;
+        width: 100vw;
     }
     .navDiv1{
         position: absolute;

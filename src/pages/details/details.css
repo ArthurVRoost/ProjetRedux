@@ -225,21 +225,22 @@
         display: none;
     }
     .imgPizza {
-        width: 90%;
+        width: 60%;
         height: 100px;
     }
+   
     .ajoutPanier{
         position: fixed;
         bottom: 20;
     }
     .title{
-        margin-left: 2%;
+        margin-left: 0%;
     }
     .description{
-        margin-left: 2%;
+        margin-left: 0%;
     }
     .ingredients{
-        margin-left: 2%;
+        margin-left:0%;
     }
     .returnDiv {
         display: none;
@@ -258,7 +259,9 @@
         z-index: 2;
         gap: 50px;
     }
-
+    .detailsDivMap{
+        width: 80%;
+    }
     .closeIcon {
         color: white;
         font-size: 24px;
@@ -274,5 +277,8 @@
         padding: 5px 10px;
 
         margin-left: 10%;
+    }
+    .detailsDivMap{
+        width: 80%;
     }
 }
