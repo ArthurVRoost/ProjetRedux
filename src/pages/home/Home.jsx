@@ -23,7 +23,7 @@ export default function Home() {
       navigate('/fini');
     }
   };
-    // Calculer le nombre total d'articles dans le panier
+    
     const totalItems = allPanier.reduce((total, item) => total + (item.quantite || 1), 0);
     
     return(
@@ -51,12 +51,12 @@ export default function Home() {
                     ))}
                 </div>
                 
-                {/* Panier desktop - affiché uniquement sur desktop */}
+                {/* Panier desktop */}
                 <div className='divHome3 desktop-only'>
                     <Panier show={true}/>
                 </div>
                 
-                {/* Bouton Commander mobile - toujours présent sur mobile */}
+                {/* Bouton Commander mobile  */}
                <div 
                     className={`mobile-commander-btn mobile-only ${allPanier.length === 0 ? 'disabled' : ''}`}
                     onClick={allPanier.length > 0 ? () => setShowPanier(true) : undefined}

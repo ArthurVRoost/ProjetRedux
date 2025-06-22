@@ -28,20 +28,19 @@ export default function Panier({ onClose, show }) {
 
 
     const handleCommander = () => {
-        // Logique de commande
-        console.log("Commande passée!");
+        
         if (onClose) {
-            onClose(); // Fermer le modal sur mobile après commande
+            onClose(); 
         }
         if (allPanier.length > 0) {
-        navigate('/fini');  // Navigation vers la page 'fini'
+        navigate('/fini');  
     }
     }
     const handleDetails = (pizza) => {
             dispatch(pizzaSelection(pizza))
             navigate(`/details/${pizza.name}`)
         }
-    // Calculer le total
+   
     const calculateTotal = () => {
         return allPanier.reduce((total, item) => {
             return total + (item.price * (item.quantite || 1));
@@ -132,7 +131,7 @@ return (
                     )}
                 </div>
 
-                {/* ✅ Le bouton Commander est maintenant à la bonne place */}
+                
                 {added && allPanier.length > 0 && (
                     <div className="btnCommander" onClick={handleCommander}>
                         <span className="quantite">{totalItems}</span>
